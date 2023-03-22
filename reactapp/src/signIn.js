@@ -1,20 +1,14 @@
 import React from "react";
-// import loginimages from "../src/images"
-import axios from 'axios';
-import HomePage from "./homepage";
-import useNavigate from "react-router-dom"
+import axios from "axios";
+import Chloe from "./Chloe.jpg";
+import HomePage from "./homepage"
+import {useNavigate} from "react-router-dom"
 
 const SignIn = () => {
-    const fetchdata=async()=>{
-        const response=await axios.get(" https://restcountries.com/v2/all?fields=name,region,flag ")
-        console.log("response====>",response)
-        if(response){
-            <h1>{response.data}</h1>
-        }
-    }
+  const navigate = useNavigate();
   return (
     <div>
-      <h1 style={{ textAlign: "left", marginLeft: 50, marginTop: 60 }}>
+      <h1 style={{ textAlign: "left", marginLeft: 50, marginTop: 100 }}>
         Sign In
       </h1>
       <h5 style={{ textAlign: "left", marginLeft: 50, marginTop: 20 }}>
@@ -46,11 +40,24 @@ const SignIn = () => {
           fontSize: 15,
           fontWeight: "bold",
         }}
-      onClick={fetchdata}
+        onClick={()=>navigate("/homepage")}
       >
         Sign In
       </button>
-      {/* <img src="loginimages.jpeg" style={{height:40}}/> */}
+      <div>
+        <img
+          src={Chloe}
+          style={{
+            height: 300,
+            float: "right",
+            width: 270,
+            margin: 7,
+            marginRight: 500,
+            marginTop: 2,
+            padding:2,
+          }}
+        />
+      </div>
     </div>
   );
 };

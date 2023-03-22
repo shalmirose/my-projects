@@ -1,19 +1,26 @@
 import React from "react";
-import axios from "axios";
-const HomePage = () => {
-  const fetchdata = async () => {
-    const response = await axios.get(
-      " https://restcountries.com/v2/all?fields=name,region,flag "
-    );
-    console.log("response====>", response);
-    // <h2>{fetchdata}</h2>;
-  };
-  return (
+import { useEffect } from "react";
+import { useState } from "react";
+
+function FetchData(){
+  const [records,setRecords]=useState([])
+  useEffect(()=>{
+    fetch("https://restcountries.com/v2/all?fields=name,region,flag")
+    .then(response=>response.json())
+    .then(data=>setRecords(data))
+    .catch(err=>console.log(err))
+  },[])
+  return(
     <div>
-      <h1>Countries</h1>
-      <button onClick={fetchdata}>get countries</button>
-      <h2>{fetchdata.data}</h2>
+      <ul>
+        {records.map((list,index)=>(
+          <div>
+          <li key={index}>COUNTRY :{list.name}<br/>REGION :{list.region}<br/></li>
+          <img src={list.flag} alt={list.flag}/>
+          </div>
+        ))}
+      </ul>
     </div>
-  );
-};
-export default HomePage;
+  )
+}
+export default FetchData
